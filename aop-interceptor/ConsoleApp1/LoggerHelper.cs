@@ -3,21 +3,19 @@ using System.Reflection;
 
 namespace ConsoleApp1
 {
+    //use MemberInfo or MethodInfo
     public static class LoggerHelper
     {
-        public static bool IsLoggerEnabled(TypeInfo type)
+        public static bool IsLoggerEnabled(MethodInfo type)
         {
-            var b1 = HasCustomAttribute(type);
-            var b2 = GetStartLog(type);
-            return false;
+            return GetStartLog(type);
         }
-        private static bool HasCustomAttribute(MemberInfo methodInfo)
-        {
-            return methodInfo.IsDefined(typeof(CustomAttribute), true);
-        }
+        //private static bool HasCustomAttribute(MemberInfo methodInfo)
+        //{
+        //    return methodInfo.IsDefined(typeof(CustomAttribute), true);
+        //}
 
-        private static bool GetStartLog(MemberInfo methodInfo)
-        //private static bool GetStartLog(MethodInfo methodInfo)
+        private static bool GetStartLog(MethodInfo methodInfo)
         {
             var attrs = methodInfo.GetCustomAttributes(true).OfType<CustomAttribute>().ToArray();
             if (attrs.Any())

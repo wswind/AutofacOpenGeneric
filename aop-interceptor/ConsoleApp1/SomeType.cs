@@ -6,10 +6,10 @@ using System.Text;
 namespace ConsoleApp1
 {
     //[Intercept(typeof(CallLogger))]
-    [Custom(StartLog = true)]
     public class SomeType : ISomeType
     {
-        
+        //di called interface ,the attribute should be at interface
+        //[Custom(StartLog = true)]
         public string Show(string input)
         {
             Console.WriteLine($"showdemo");

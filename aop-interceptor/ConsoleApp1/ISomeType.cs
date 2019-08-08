@@ -6,6 +6,7 @@ namespace ConsoleApp1
 {
     public interface ISomeType
     {
+        [Custom(StartLog = true)]
         string Show(string input);
     }
 }

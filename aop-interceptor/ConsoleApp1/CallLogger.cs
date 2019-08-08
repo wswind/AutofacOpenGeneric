@@ -22,6 +22,11 @@ namespace ConsoleApp1
               invocation.Method.Name,
               string.Join(", ", invocation.Arguments.Select(a => (a ?? "").ToString()).ToArray()));
 
+            if(LoggerHelper.IsLoggerEnabled(invocation.Method))
+            {
+                _output.WriteLine("Logger is Enabled");
+            }
+
             invocation.Proceed();
 
             _output.WriteLine("Done: result was '{0}'.", invocation.ReturnValue);

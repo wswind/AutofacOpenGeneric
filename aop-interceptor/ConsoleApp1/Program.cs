@@ -37,12 +37,9 @@ namespace ConsoleApp1
             //builder.Register(c => new CallLogger(Console.Out))
             //       .Named<IInterceptor>("log-calls");
 
-
-            var type = typeof(SomeType);
-            var typeInfo = type.GetTypeInfo();
-            var b = LoggerHelper.IsLoggerEnabled(typeInfo);
-
-
+            //var type = typeof(SomeType);
+            //var typeInfo = type.GetTypeInfo();
+            //var b = LoggerHelper.IsLoggerEnabled(typeInfo);
 
 
             var container = builder.Build();
