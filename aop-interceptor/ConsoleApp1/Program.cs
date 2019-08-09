@@ -22,8 +22,8 @@ namespace ConsoleApp1
 
             builder.RegisterType<SomeType>()
               .As<ISomeType>()
-              .EnableInterfaceInterceptors()
-              .InterceptedBy(typeof(CallLogger));
+              .EnableInterfaceInterceptors();
+
             // Typed registration
             builder.Register(c => new CallLogger(Console.Out));
 
