@@ -22,11 +22,12 @@ namespace Lifetime_Scope
     {
         static void Main(string[] args)
         {
+            //https://autofaccn.readthedocs.io/en/latest/lifetime/instance-scope.html#instance-per-matching-lifetime-scope
             var builder = new ContainerBuilder();
             builder.RegisterType<Worker>();
             const string scope_name = "scope1";
-            builder.RegisterType<Worker>().InstancePerLifetimeScope();
-            //builder.RegisterType<Worker>().InstancePerMatchingLifetimeScope(scope_name);
+            //builder.RegisterType<Worker>().InstancePerLifetimeScope();
+            builder.RegisterType<Worker>().InstancePerMatchingLifetimeScope(scope_name);
 
             var container = builder.Build();
             using (var scope1 = container.BeginLifetimeScope(scope_name))
