@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ConsoleApp1
 {
-    [Intercept(typeof(CallLogger))] 
+    //[Intercept(typeof(CallLogger))] 
     public interface ISomeType
     {
         [Custom(StartLog = true)]

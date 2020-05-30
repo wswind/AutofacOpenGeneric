@@ -2,7 +2,7 @@
  https://autofaccn.readthedocs.io/en/latest/advanced/interceptors.html
  this is a demo for autofac interceptors
  */
-
+//#define TYPED_REGISTRATION
 
 using Autofac;
 using Autofac.Extras.DynamicProxy;
@@ -20,28 +20,23 @@ namespace ConsoleApp1
             // create builder
             var builder = new ContainerBuilder();
 
-            builder.RegisterType<SomeType>()
-              .As<ISomeType>()
-              .EnableInterfaceInterceptors();
+          
 
-            // Typed registration
+#if TYPED_REGISTRATION
             builder.Register(c => new CallLogger(Console.Out));
-
-
-            // Enable Interception on Types
-            //builder.RegisterType<SomeType>()
-            //       .As<ISomeType>()
-            //       .EnableInterfaceInterceptors()
-            //       .InterceptedBy(typeof(CallLogger));
-            //// Named registration
-            //builder.Register(c => new CallLogger(Console.Out))
-            //       .Named<IInterceptor>("log-calls");
-
-            //var type = typeof(SomeType);
-            //var typeInfo = type.GetTypeInfo();
-            //var b = LoggerHelper.IsLoggerEnabled(typeInfo);
-
-
+            builder.RegisterType<SomeType>()
+                   .As<ISomeType>()
+                   .EnableInterfaceInterceptors()
+                   .InterceptedBy(typeof(CallLogger));
+#else // Named registration
+            builder.Register(c => new CallLogger(Console.Out))
+                .Named<IInterceptor>("log-calls");
+            builder.RegisterType<SomeType>()
+                .As<ISomeType>()
+                .EnableInterfaceInterceptors()
+                .InterceptedBy("log-calls");
+           
+#endif
             var container = builder.Build();
             var willBeIntercepted = container.Resolve<ISomeType>();
             willBeIntercepted.Show("this is a test");
