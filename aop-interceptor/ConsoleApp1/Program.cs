@@ -19,9 +19,6 @@ namespace ConsoleApp1
         {
             // create builder
             var builder = new ContainerBuilder();
-
-          
-
 #if TYPED_REGISTRATION
             builder.Register(c => new CallLogger(Console.Out));
             builder.RegisterType<SomeType>()
